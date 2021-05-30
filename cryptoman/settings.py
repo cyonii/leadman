@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     # Native apps
     'leads.apps.LeadsConfig',
+    'frontend.apps.FrontendConfig',
 ]
 
 MIDDLEWARE = [
