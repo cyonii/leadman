@@ -35,7 +35,7 @@ export class LeadList extends Component {
                   <td>{lead.email}</td>
                   <td>{lead.notes}</td>
                   <td>
-                    <button className="btn btn-danger btn-sm">Delete</button>
+                    <button className="btn btn-danger btn-sm py-0 fw-bold">Delete</button>
                   </td>
                 </tr>
               );

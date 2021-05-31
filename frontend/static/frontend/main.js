@@ -657,7 +657,7 @@ var LeadList = /*#__PURE__*/function (_Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("tr", {
           key: lead.uuid
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("td", null, index + 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("td", null, fullName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("td", null, lead.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("td", null, lead.notes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", {
-          className: "btn btn-danger btn-sm"
+          className: "btn btn-danger btn-sm py-0 fw-bold"
         }, "Delete")));
       }))));
     }
