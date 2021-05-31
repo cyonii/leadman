@@ -5,10 +5,11 @@ import LeadList from './LeadList';
 export default function Dashboard() {
   return (
     <div className="container">
-      <div className="row justify-content-center">
-        <div className="col-md-8 col-lg-5">
+      <div className="row gy-4 gy-lg-0 gx-lg-5 justify-content-center">
+        <div className="col-md-4 col-lg-3">
           <LeadForm />
-          <div className="my-5"></div>
+        </div>
+        <div className="col-md-8 col-lg-5">
           <LeadList />
         </div>
       </div>

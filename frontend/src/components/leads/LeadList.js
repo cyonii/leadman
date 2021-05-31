@@ -17,7 +17,7 @@ export class LeadList extends Component {
   render() {
     return (
       <Fragment>
-        <h1 className="fs-4 text-dark">Leads</h1>
+        <h1 className="fs-5 fw-bold text-dark">Leads</h1>
         <table className="table table-striped">
           <thead className="text-muted">
             <tr>
