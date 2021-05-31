@@ -404,7 +404,8 @@ var App = /*#__PURE__*/function (_Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getLeads": () => (/* binding */ getLeads)
+/* harmony export */   "getLeads": () => (/* binding */ getLeads),
+/* harmony export */   "deleteLead": () => (/* binding */ deleteLead)
 /* harmony export */ });
 /* harmony import */ var _type__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./type */ "./frontend/src/actions/type.js");
  // FETCH LEADS FROM SERVER
@@ -422,6 +423,25 @@ var getLeads = function getLeads() {
       return console.error(err);
     });
   };
+}; // DELETE LEAD AT SERVER
+
+var deleteLead = function deleteLead(id) {
+  return function (dispatch) {
+    fetch("api/leads/".concat(id, "/"), {
+      method: 'DELETE'
+    }).then(function (res) {
+      if (res.status === 204) {
+        dispatch({
+          type: _type__WEBPACK_IMPORTED_MODULE_0__.DELETE_LEAD,
+          payload: id
+        });
+      } else {
+        console.log(res);
+      }
+    })["catch"](function (err) {
+      return console.log(err);
+    });
+  };
 };
 
 /***/ }),
@@ -435,9 +455,11 @@ var getLeads = function getLeads() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "GET_LEADS": () => (/* binding */ GET_LEADS)
+/* harmony export */   "GET_LEADS": () => (/* binding */ GET_LEADS),
+/* harmony export */   "DELETE_LEAD": () => (/* binding */ DELETE_LEAD)
 /* harmony export */ });
 var GET_LEADS = 'GET_LEADS';
+var DELETE_LEAD = 'DELETE_LEAD';
 
 /***/ }),
 
@@ -646,6 +668,8 @@ var LeadList = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(react__WEBPACK_IMPORTED_MODULE_5__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("h1", {
         className: "fs-4 text-dark"
       }, "Leads"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("table", {
@@ -656,8 +680,13 @@ var LeadList = /*#__PURE__*/function (_Component) {
         var fullName = "".concat(lead.first_name, " ").concat(lead.last_name);
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("tr", {
           key: lead.uuid
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("td", null, index + 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("td", null, fullName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("td", null, lead.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("td", null, lead.notes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", {
-          className: "btn btn-danger btn-sm py-0 fw-bold"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("td", null, index + 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("td", null, fullName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("td", null, lead.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("td", {
+          className: "text-muted"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("small", {
+          className: "fw-light"
+        }, lead.note)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", {
+          className: "btn btn-danger btn-sm py-0 fw-bold",
+          onClick: _this.props.deleteLead.bind(_this, lead.uuid)
         }, "Delete")));
       }))));
     }
@@ -676,7 +705,8 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_6__.connect)(mapStateToProps, {
-  getLeads: _actions_leads__WEBPACK_IMPORTED_MODULE_8__.getLeads
+  getLeads: _actions_leads__WEBPACK_IMPORTED_MODULE_8__.getLeads,
+  deleteLead: _actions_leads__WEBPACK_IMPORTED_MODULE_8__.deleteLead
 })(LeadList));
 
 /***/ }),
@@ -731,9 +761,16 @@ var initialState = {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case 'GET_LEADS':
+    case _actions_type__WEBPACK_IMPORTED_MODULE_1__.GET_LEADS:
       return _objectSpread(_objectSpread({}, state), {}, {
         leads: action.payload
+      });
+
+    case _actions_type__WEBPACK_IMPORTED_MODULE_1__.DELETE_LEAD:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        leads: state.leads.filter(function (lead) {
+          return lead.uuid !== action.payload;
+        })
       });
 
     default:
