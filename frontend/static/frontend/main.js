@@ -695,7 +695,9 @@ var LeadList = /*#__PURE__*/function (_Component) {
   return LeadList;
 }(react__WEBPACK_IMPORTED_MODULE_5__.Component);
 LeadList.propTypes = {
-  leads: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().array.isRequired)
+  leads: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().array.isRequired),
+  getLeads: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().func.isRequired),
+  deleteLead: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().func.isRequired)
 };
 
 var mapStateToProps = function mapStateToProps(state) {
