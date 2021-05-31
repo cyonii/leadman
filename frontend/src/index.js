@@ -1,17 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import store from './store';
 import App from './App';
-
-const endpoint = `${document.URL}api/leads/`;
-const fetchData = async () => await fetch(endpoint);
-
-fetchData()
-  .then((res) => res.json())
-  .then((data) => console.log(data));
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
